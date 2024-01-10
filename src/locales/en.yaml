@@ -1,5 +1,7 @@
 greeting:
-  user: "ŇÂSP 🤝: \n
+  user: "
+    Welcome ${userName} \n \n
+    ŇÂSP 🤝: \n
     ŇÂSP 🤝: \n
     እንኳን ወደ NASP ONLINE CLASS በሰላም መጡ! \n
 
@@ -28,7 +30,7 @@ greeting:
     ካስገቡ ቧኋላ ጀረሰኝ ወይም screen shoot ይላኩልን እና ለመመዝገብ እንዲመቸን ሙሉ ስሞን ይላኩልን \n
 
     400 le 2 ወር። \n
-    ማንኛውንም ጥያቌ በዚህ ይላኩልን። @habesha_web_academy_support_bot
+    ማንኛውንም ጥያቌ በዚህ ይላኩልን። @naspsupportbot
     "
   loggedIn: Welcome back ${userName}!
   admin: Welcome Admin!
@@ -55,20 +57,19 @@ user:
     5. በማንኛውም ሰአት ጥያቄዎን ማስተናገድ እና ተገቢውን መላሽ መስጠት መቻላችን ሌለኛው ተመራጭ የሚያስደርገን ነው።
     '
   requirements: 'Requirements'
-  requirements_details: "እንኳን ወደ ሀበሻ web academy በሰላም መጡ። \n \n
-    ✅ ትምህርቱን የምንሰጠው በ telegram ነው። \n \n
-    ✅ ከዚህ በፊት coding እውቀት አያስፈልግም። \n \n
-    ✅ computer ግድ ነው። \n \n
-    ✅ትምህርቱ የሚቆየው ለ 3 ወር ነው። \n \n
-    ✅ በሳምንት 3 ቀን የትምህርት ጊዜ ይኖረናል። \n \n
-    ✅ ክፍያ እንደፈጸሙ ወደ private online group add የምናደርጋችሁ ይሆናል። \n \n
-    ✅ ለ 3 ወር 500 ብር። \n \n
-    ✅ ሀበሻ web academy 1000599057327 yohannes Demeke,Nikodimos jemaneh ንግድ ባንክ ነው። \n \n
-    ✅ ካስገቡ በኋላ ደረሰኝ ወይም screenshot ይላኩልን።"
+  requirements_details: 'ŇÂSP 🤝:
+    1000529847916 ንግድ ባንክ
+    ካስገቡ ቧኋላ ጀረሰኝ ወይም screen shoot ይላኩልን እና ለመመዝገብ እንዲመቸን ሙሉ ስሞን ይላኩልን
+
+    400 le 2 ወር
+    '
   about: 'About'
-  send_screenshot:
-    "ሀበሻ web academy 1000599057327 yohannes Demeke,Nikodimos jemaneh ንግድ ባንክ ነው። \n \n
-    ✅ካስገቡ በኋላ ደረሰኝ ወይም screenshot ይላኩልን።"
+  send_screenshot: 'ŇÂSP 🤝:
+    1000529847916 ንግድ ባንክ
+    ካስገቡ ቧኋላ ጀረሰኝ ወይም screen shoot ይላኩልን እና ለመመዝገብ እንዲመቸን ሙሉ ስሞን ይላኩልን
+
+    400 le 2 ወር
+    '
   cancel: '🚫 Cancel'
   uploading_image: 'Sending Screenshot...'
   image_uploaded: 'Screenshot sent successfully, we will contact you in a while'
