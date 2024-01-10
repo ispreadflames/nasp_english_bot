@@ -1,0 +1,12 @@
+greeting:
+  user: "እንኩን ደህና መጡ ${userName}!"
+  loggedIn: "ሰላም ${userName}!"
+  admin: "ሰላም Admin!"
+user: 
+  myRents: '🛖 የኔ ኪራዮች'
+  newRent: '🆕 አዲስ ኪራይ'
+  contactUs: '🆕 ያግኙን'
+  changeLanguage: '🆕 ቋንቋ ይቀይሩ'
+inst:
+  chooseLanguage: 'እባክዎ ቋንቋ ይምረጡ'
+  Register: 'ይመዝገቡ'
