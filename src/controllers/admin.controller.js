@@ -15,9 +15,10 @@ const onGetPayments = async (ctx) => {
   for (const payment of payments) {
     await composePayment(
       payment.imageUrl,
-      payment.name,
+      payment.firstName,
+      payment.lastName,
       payment.telegramId,
-      payment.username,
+      payment.userName,
       payment.createdAt,
       ctx,
     );

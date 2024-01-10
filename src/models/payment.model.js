@@ -7,7 +7,13 @@ const paymentSchema = mongoose.Schema({
     trim: true,
     lowercase: true,
   },
-  name: {
+  firstName: {
+    type: String,
+    required: true,
+    trim: true,
+    lowercase: true,
+  },
+  lastName: {
     type: String,
     required: true,
     trim: true,
@@ -19,7 +25,7 @@ const paymentSchema = mongoose.Schema({
     trim: true,
     lowercase: true,
   },
-  username: {
+  userName: {
     type: String,
     required: true,
     trim: true,

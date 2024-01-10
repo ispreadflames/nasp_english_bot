@@ -54,8 +54,14 @@ const changeUserLangPreferences = async (id, lang) => {
  * @param {string} username - The telegram ID associated with the payment.
  * @return {Object} - The created Payment object.
  */
-const savePayment = (imageUrl, name, telegramId, username) => {
-  return Payment.create({ imageUrl, name, telegramId, username });
+const savePayment = (imageUrl, firstName, telegramId, userName, lastName) => {
+  return Payment.create({
+    imageUrl,
+    firstName,
+    telegramId,
+    userName,
+    lastName,
+  });
 };
 
 module.exports = {

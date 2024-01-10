@@ -82,11 +82,7 @@ const onBotStart = async (ctx) => {
  */
 
 const onRegisterUser = (ctx) => {
-  ctx.reply(ctx.i18n.t('user.send_screenshot'), {
-    reply_markup: {
-      keyboard: [[{ text: ctx.i18n.t('user.cancel') }]],
-    },
-  });
+  ctx.scene.enter('image');
 };
 
 /**

@@ -14,6 +14,12 @@ const UserSchema = mongoose.Schema({
     trim: true,
     lowercase: true,
   },
+  userName: {
+    type: String,
+    required: true,
+    trim: true,
+    lowercase: true,
+  },
   telegramId: {
     type: String,
     trim: true,

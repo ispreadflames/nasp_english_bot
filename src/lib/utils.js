@@ -27,15 +27,16 @@ const getFileUrl = async (ctx, fileId) => {
  */
 const composePayment = async (
   imageUrl,
-  name,
+  firstName,
+  lastName,
   telegramId,
-  username,
+  userName,
   createdAt,
   ctx,
 ) => {
   const paidAt = new Date(createdAt);
   ctx.replyWithPhoto(imageUrl, {
-    caption: `Name: ${name} \nUsername: @${username} \nTelegramId: ${telegramId} \n PaidAt: ${date.format(
+    caption: `Name: ${firstName} ${lastName} \nUsername: @${userName} \nTelegramId: ${telegramId} \n PaidAt: ${date.format(
       new Date(paidAt),
       'yyyy-MM-dd HH:mm:ss',
     )}`,

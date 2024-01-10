@@ -1,155 +1,85 @@
 const { Scenes } = require('telegraf');
 const { message } = require('telegraf/filters');
-const { userValidator } = require('../validators');
-const validate = require('../lib/validate');
+const { userServices } = require('../services');
 const { userController } = require('../controllers');
-const bot = require('../lib/bot');
+const { getFileUrl } = require('../lib/utils');
+const cloudinary = require('../config/cloudinary');
+const { getAdminTelegramIds } = require('../services/admin.service');
+const date = require('date-fns');
 
 const firstNameScene = new Scenes.BaseScene('firstName');
 const lastNameScene = new Scenes.BaseScene('lastName');
-const emailScene = new Scenes.BaseScene('email');
-const contactScene = new Scenes.BaseScene('contact');
-const sexScene = new Scenes.BaseScene('sex');
+const imageScene = new Scenes.BaseScene('image');
 
-const cancelMarkup = {
-  reply_markup: {
-    inline_keyboard: [
-      [{ text: 'Cancel', callback_data: 'cancel_registration' }],
-    ],
-  },
-};
+imageScene.enter((ctx) => {
+  ctx.reply(ctx.i18n.t('user.send_screenshot'), {
+    reply_markup: {
+      keyboard: [[{ text: ctx.i18n.t('user.cancel') }]],
+    },
+  });
+});
+
+imageScene.on(message('photo'), async (ctx) => {
+  const fileId = ctx.message.photo[ctx.message.photo.length - 1].file_id;
+  const { fileUrl, file_size } = await getFileUrl(ctx, fileId);
+  ctx.reply('Uploading image...');
+  const { url } = await cloudinary.uploader.upload(fileUrl);
+
+  ctx.session.imageUrl = url;
+
+  ctx.scene.enter('firstName');
+});
 
 firstNameScene.enter((ctx) => {
-  ctx.reply('Please enter your name:', cancelMarkup);
+  ctx.reply('Send me your first name');
 });
 
 firstNameScene.on(message('text'), (ctx) => {
-  const firstName = ctx.message.text;
-  if (
-    !validate({
-      ctx,
-      message: 'Invalid name. Please enter a name between 3 and 15 characters.',
-      validator: userValidator.firstName,
-      value: firstName,
-    })
-  )
-    return;
-  ctx.session.firstName = firstName;
+  ctx.session.firstName = ctx.message.text;
   ctx.scene.enter('lastName');
 });
 
 lastNameScene.enter((ctx) => {
-  ctx.reply('Please enter your last name:');
+  ctx.reply('Send me your last name');
 });
 
-lastNameScene.on(message('text'), (ctx) => {
-  const lastName = ctx.message.text;
-  if (
-    !validate({
-      ctx,
-      message:
-        'Invalid First name. Please enter a name between 3 and 15 characters.',
-      validator: userValidator.lastName,
-      value: lastName,
-    })
-  )
-    return;
-  ctx.session.lastName = lastName;
-  ctx.scene.enter('email');
-});
+lastNameScene.on(message('text'), async (ctx) => {
+  ctx.session.lastName = ctx.message.text;
 
-emailScene.enter((ctx) => {
-  ctx.reply('Enter your email (optional)', {
-    reply_markup: {
-      inline_keyboard: [[{ text: 'Skip', callback_data: 'skip_email' }]],
-      resize_keyboard: true,
-    },
-  });
-});
+  const { firstName, lastName, imageUrl } = ctx.session;
 
-emailScene.on(message('text'), (ctx) => {
-  const email = ctx.message.text;
-  if (
-    !validate({
-      ctx,
-      message: 'Invalid email. Please enter a valid email.',
-      validator: userValidator.email,
-      value: email,
-    })
-  )
-    return;
-  ctx.session.email = email;
-  ctx.scene.enter('sex');
-});
+  const user = await userServices.savePayment(
+    imageUrl,
+    firstName,
+    ctx.from.id,
+    ctx.from.username,
+    lastName,
+  );
 
-sexScene.enter((ctx) => {
-  ctx.reply('Choose your sex', {
-    reply_markup: {
-      keyboard: [[{ text: 'Male' }, { text: 'Female' }]],
-      resize_keyboard: true,
-    },
-  });
-});
+  const admins = await getAdminTelegramIds();
 
-sexScene.on(message('text'), (ctx) => {
-  const sex = ctx.message.text;
-  if (
-    !validate({
-      ctx,
-      message: 'Invalid sex. Please choose male or female.',
-      validator: userValidator.sex,
-      value: sex,
-    })
-  )
-    return;
-  ctx.session.sex = sex;
-  ctx.scene.enter('contact');
-});
+  const paidAt = new Date(user.createdAt);
 
-contactScene.enter((ctx) => {
-  ctx.reply('Please share your contact Information', {
-    reply_markup: {
-      keyboard: [
-        [
-          {
-            text: 'Share Contact',
-            request_contact: true,
-          },
-        ],
-      ],
-      resize_keyboard: true,
-    },
-  });
-});
+  for (const admin of admins) {
+    const caption = `Name: ${firstName} ${lastName} \nUsername: @${
+      ctx.from.username
+    } \nTelegramId: ${ctx.from.id} \n PaidAt: ${date.format(
+      new Date(paidAt),
+      'yyyy-MM-dd HH:mm:ss',
+    )}`;
 
-contactScene.on(message('contact'), async (ctx) => {
-  const contactInfo = ctx.message.contact;
-  ctx.session.contactInfo = contactInfo;
+    ctx.telegram.sendPhoto(admin.telegramId, url, {
+      caption,
+    });
+  }
+
   ctx.scene.leave();
-  const {
-    firstName,
-    lastName,
-    email,
-    contactInfo: { phone_number },
-  } = ctx.session;
-  await userController.onSaveUser({
-    firstName,
-    lastName,
-    phoneNumber: phone_number,
-    telegramId: ctx.from.id,
-    email,
-  });
-  ctx.reply('Registration completed!', {
-    reply_markup: {
-      inline_keyboard: [[{ text: 'Main Menu', callback_data: 'main_menu' }]],
-    },
-  });
+
+  ctx.reply('Thank you for your payment, we will get back to you soon!');
 });
 
 module.exports = {
   firstNameScene,
   lastNameScene,
-  emailScene,
-  contactScene,
-  sexScene,
+  imageScene,
 };
