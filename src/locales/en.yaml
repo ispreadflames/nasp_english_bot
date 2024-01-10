@@ -1,8 +1,9 @@
 greeting:
-  user: "
-    Welcome ${userName} \n \n
-    ŇÂSP 🤝: \n
-    ŇÂSP 🤝: \n
+  user: '
+    Welcome ${userName} \n
+
+    ŇÂSP 🤝:
+    ŇÂSP 🤝:
     እንኳን ወደ NASP ONLINE CLASS በሰላም መጡ! \n
 
     ትምህርቱ የሚሰጥበት መንገድ \n
@@ -25,13 +26,13 @@ greeting:
 
     ❇️ ክፍያ እንደፈጸሙ ወደ online group add የምናደርጋችሁ ይሆናል። \n
 
-    ŇÂSP 🤝: \n
-    1000529847916 ንግድ ባንክ \n
+    ŇÂSP 🤝:
+    1000529847916 Temesgen Girma ንግድ ባንክ
     ካስገቡ ቧኋላ ጀረሰኝ ወይም screen shoot ይላኩልን እና ለመመዝገብ እንዲመቸን ሙሉ ስሞን ይላኩልን \n
 
-    400 le 2 ወር። \n
+    400 ለ 2 ወር። \n
     ማንኛውንም ጥያቌ በዚህ ይላኩልን። @naspsupportbot
-    "
+    '
   loggedIn: Welcome back ${userName}!
   admin: Welcome Admin!
 user:
@@ -39,10 +40,10 @@ user:
   newRent: '🆕 New Rent'
   contactUs: '🆕 Contact Us'
   changeLanguage: '🆕 Change Language'
-  registration: 'Registration'
-  testimonials: 'Testimonials'
+  registration: 'Registration / ለመመዝገብ'
+  testimonials: 'Testimonials / ምስክርነቶች'
   testimonials_details: 'እነዚህ ከስር የተዘረዘሩት ባለፈው ዙር ኮርሱን የወሰዱ እና ምስጋናቸውን ከላኩ ሰዎች መካከል ናቸው።'
-  why_choose_us: 'Why Choose Us?'
+  why_choose_us: 'Why Choose Us? / ለምን እኛን ይመርጣሉ?'
   why_choose_us_details: '
     ለምን እኛን ይመርጣሉ ?
 
@@ -71,7 +72,7 @@ user:
     '
   cancel: '🚫 Cancel'
   uploading_image: 'Sending Screenshot...'
-  image_uploaded: 'Screenshot sent successfully, we will contact you in a while'
+  image_uploaded: 'ክፍያው በተሳካ ሁኔታ ተልኳል።'
 admin:
   payments: 'Payments'
   statistics: 'Statistics'
