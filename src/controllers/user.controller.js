@@ -24,7 +24,7 @@ const onBotStart = async (ctx) => {
         keyboard: [
           [
             {
-              text: ctx.i18n.t('user.requirements'),
+              text: ctx.i18n.t('user.registration'),
             },
           ],
           [
@@ -32,17 +32,8 @@ const onBotStart = async (ctx) => {
               text: ctx.i18n.t('user.why_choose_us'),
             },
           ],
-          [
-            {
-              text: ctx.i18n.t('user.registration'),
-            },
-          ],
-          [
-            {
-              text: ctx.i18n.t('user.testimonials'),
-            },
-          ],
         ],
+        resize_keyboard: true,
       },
     });
   else {
