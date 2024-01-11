@@ -85,6 +85,7 @@ const onRegisterUser = (ctx) => {
   ctx.reply(ctx.i18n.t('user.send_screenshot'), {
     reply_markup: {
       keyboard: [[{ text: ctx.i18n.t('user.cancel') }]],
+      resize_keyboard: true
     },
   });
 };
