@@ -10,7 +10,13 @@ adminActions();
 const production = () => {
   console.log('Bot runs in production mode');
   console.log(`${config.username} setting webhook: ${config.webHook}`);
-  bot.telegram.setWebhook(config.webHook);
+  console.log(config.webHook);
+  bot.launch({
+    webhook: {
+      domain: config.webHookUrl,
+      port: config.port,
+    },
+  });
   console.log(`${config.username} starting webhook on port: ${config.port}`);
 };
 

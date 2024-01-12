@@ -10,11 +10,11 @@ const envVarsSchema = Joi.object()
     USERNAME: Joi.string().required(),
     BOT_TOKEN: Joi.string().required(),
     MONGODB_URL: Joi.string().required(),
+    CHANNEL_ID: Joi.string().required(),
     CLOUD_NAME: Joi.string().required(),
     COULDINRAY_API_KEY: Joi.string().required(),
     CLOUDINARY_API_SECRET: Joi.string().required(),
     CLOUDINARY_URL: Joi.string().required(),
-    CHANNEL_ID: Joi.string().required(),
   })
   .unknown();
 
@@ -32,10 +32,11 @@ module.exports = {
   botToken: envVars.BOT_TOKEN,
   username: envVars.USERNAME,
   webHook: `${envVars.WEBHOOK_URL}/bot${envVars.BOT_TOKEN}`,
+  webHookUrl: envVars.WEBHOOK_URL,
   mongoUri: envVars.MONGODB_URL,
+  channelId: envVars.CHANNEL_ID,
   cloudName: envVars.CLOUD_NAME,
   cloudinaryApiKey: envVars.COULDINRAY_API_KEY,
   cloudinaryApiSecret: envVars.CLOUDINARY_API_SECRET,
   cloudinaryUrl: envVars.CLOUDINARY_URL,
-  channelId: envVars.CHANNEL_ID,
 };
